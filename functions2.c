@@ -16,7 +16,7 @@ int print_pointer(va_list types, char buffer[],
 {
 	char extra_c = 0, padd = ' ';
 	int ind = BUFF_SIZE - 2, length = 2, padd_start = 1; /* length=2, for '0x' */
-	unsigned long num_addrs;
+	unsigned long num_address;
 	char map_to[] = "0123456789abcdef";
 	void *addrs = va_arg(types, void *);
 
@@ -29,12 +29,12 @@ int print_pointer(va_list types, char buffer[],
 	buffer[BUFF_SIZE - 1] = '\0';
 	UNUSED(precision);
 
-	num_addrs = (unsigned long)addrs;
+	num_address = (unsigned long)addrs;
 
-	while (num_addrs > 0)
+	while (num_address > 0)
 	{
-		buffer[ind--] = map_to[num_addrs % 16];
-		num_addrs /= 16;
+		buffer[ind--] = map_to[num_address % 16];
+		num_address /= 16;
 		length++;
 	}
 
@@ -144,7 +144,7 @@ int print_reverse(va_list types, char buffer[],
  * @width: get width
  * @precision: Precision specification
  * @size: Size specifier
- * Return: Numbers of chars printed
+ * Return: returns the number of chars printed
  */
 int print_rot13string(va_list types, char buffer[],
 	int flags, int width, int precision, int size)
